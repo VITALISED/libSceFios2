@@ -245,8 +245,8 @@ extern "C"
 {
 #endif
 
-    uintptr_t WINAPI sceFiosIOFilterCache;
-    uintptr_t WINAPI sceFiosIOFilterPsarcDearchiver;
+    SceFiosRamCacheContext *WINAPI sceFiosIOFilterCache;
+    SceFiosPsarcDearchiverContext *WINAPI sceFiosIOFilterPsarcDearchiver;
 
     SceFiosSize WINAPI sceFiosFHGetSize(SceFiosHandle lFH);
     __int64 WINAPI sceFiosIOFilterAdd(__int64 unk1, uintptr_t lpIOFilter, SceFiosRamCacheContext *lpRamCacheContext);
