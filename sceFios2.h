@@ -21,15 +21,15 @@ typedef int SceFiosHandle;
 typedef void (*SceFiosIOFilterCallback)();
 typedef int (*SceFiosVprintfCallback)(const char *, char *);
 
-enum FiosMemorySizes
+typedef enum
 {
     Fios_OpStorage = 0xA0040,
     Fios_ChunkStorage = 0xA0400,
     Fios_FhStorage = 0x8D040,
     Fios_DhStorage = 0x470,
-};
+} FiosMemorySizes;
 
-enum SceFiosOpFlags
+typedef enum 
 {
     SCE_FIOS_OPFLAG_IMMED = (1 << 0),
     SCE_FIOS_OPFLAG_DONTUSECACHE = (1 << 1),
@@ -44,23 +44,23 @@ enum SceFiosOpFlags
     SCE_FIOS_OPFLAG_REUSECACHE = (1 << 10),
     SCE_FIOS_OPFLAG_DONTFILLCACHE = (1 << 11),
     SCE_FIOS_OPFLAG_NOCACHE = (1 << 12),
-};
+} SceFiosOpFlags;
 
-enum SceFiosOpEvents
+typedef enum 
 {
     SCE_FIOS_OPEVENT_COMPLETE = 1,
     SCE_FIOS_OPEVENT_DELETE = 2,
     SCE_FIOS_OPEVENT_START = 3,
-};
+} SceFiosOpEvents;
 
-enum SceFiosWhence
+typedef enum 
 {
     SCE_FIOS_SEEK_SET,
     SCE_FIOS_SEEK_CUR,
     SCE_FIOS_SEEK_END,
-};
+} SceFiosWhence;
 
-enum SceFiosOpenFlags
+typedef enum 
 {
     SCE_FIOS_O_READ = (1 << 0),
     SCE_FIOS_O_RDONLY = (1 << 0),
@@ -71,72 +71,72 @@ enum SceFiosOpenFlags
     SCE_FIOS_O_CREAT = (1 << 3),
     SCE_FIOS_O_TRUNC = (1 << 4),
     SCE_FIOS_O_DIRECT = (1 << 12),
-};
+} SceFiosOpenFlags;
 
-enum SceFiosOverlayLimits
+typedef enum 
 {
     SCE_FIOS_OVERLAY_MAX_OVERLAYS = 64,
     SCE_FIOS_OVERLAY_POINT_MAX = 292,
-};
+} SceFiosOverlayLimits;
 
-enum SceFiosOverlayType
+typedef enum 
 {
     SCE_FIOS_OVERLAY_TYPE_OPAQUE,
     SCE_FIOS_OVERLAY_TYPE_TRANSLUCENT,
     SCE_FIOS_OVERLAY_TYPE_NEWER,
     SCE_FIOS_OVERLAY_TYPE_WRITABLE,
-};
+} SceFiosOverlayType;
 
-enum SceFiosIOSchedulerAlgorithm
+typedef enum 
 {
     SCE_FIOS_IO_SCHED_DEADLINE,
     SCE_FIOS_IO_SCHED_PRIORITY,
     SCE_FIOS_IO_SCHED_FIFO,
     SCE_FIOS_IO_SCHED_MAXIMUM,
-};
+} SceFiosIOSchedulerAlgorithm;
 
-enum SceFiosIOThreadCount
+typedef enum 
 {
     SCE_FIOS_IO_THREAD_COUNT_MIN = 1,
     SCE_FIOS_IO_THREAD_COUNT_MAX = 1,
-};
+} SceFiosIOThreadCount;
 
-enum SceFiosSchedulerThreadCount
+typedef enum
 {
     SCE_FIOS_SCHEDULER_THREAD_COUNT_MIN = 1,
     SCE_FIOS_SCHEDULER_THREAD_COUNT_MAX = 3,
     SCE_FIOS_SCHEDULER_THREAD_COUNT_DEFAULT = 1,
-};
+} SceFiosSchedulerThreadCount;
 
-enum SceFiosPsarcDearchiverFlags
+typedef enum 
 {
     SCE_FIOS_PSARC_DEARCHIVER_MOUNT_TRANSLUCENT = 1,
-};
+} SceFiosPsarcDearchiverFlags;
 
-enum SceFiosThreadType
+typedef enum 
 {
     SCE_FIOS_IO_THREAD,
     SCE_FIOS_DECOMPRESSOR_THREAD,
     SCE_FIOS_CALLBACK_THREAD,
     SCE_FIOS_THREAD_TYPES,
-};
+} SceFiosThreadType;
 
-struct SceFiosPsarcDearchiverContext
+typedef struct 
 {
     unsigned __int64 sizeOfContext;
     unsigned __int64 workBufferSize;
     void *pWorkBuffer;
     __int64 flags;
     __int64 reserved[3];
-};
+} SceFiosPsarcDearchiverContext;
 
-struct SceFiosBuffer
+typedef struct 
 {
     void *pPtr;
     unsigned __int64 length;
-};
+} SceFiosBuffer;
 
-struct SceFiosRamCacheContext
+typedef struct 
 {
     unsigned __int64 sizeOfContext;
     unsigned __int64 workBufferSize;
@@ -147,9 +147,9 @@ struct SceFiosRamCacheContext
     SceFiosRAMCacheCallback pCallback;
     void *pCallbackData;
     __int64 reserved;
-};
+} SceFiosRamCacheContext;
 
-struct SceFiosParams
+typedef struct 
 {
     unsigned __int32 initialized : 1;
     unsigned __int32 paramsSize : 15;
@@ -177,9 +177,9 @@ struct SceFiosParams
     int threadPriority[3];
     int threadAffinity[3];
     int threadStackSize[3];
-};
+} SceFiosParams;
 
-struct SceFiosOpAttr
+typedef struct 
 {
     __int64 deadline;
     SceFiosOpCallback pCallback;
@@ -189,17 +189,17 @@ struct SceFiosOpAttr
     unsigned int userTag;
     void *userPtr;
     void *pReserved;
-};
+} SceFiosOpAttr;
 
-struct SceFiosOpenParams
+typedef struct 
 {
     unsigned __int32 openFlags : 16;
     unsigned __int32 opFlags : 16;
     unsigned int reserved;
     SceFiosBuffer buffer;
-};
+} SceFiosOpenParams;
 
-struct SceFiosDirEntry
+typedef struct 
 {
     SceFiosSize fileSize;
     unsigned int statFlags;
@@ -208,9 +208,9 @@ struct SceFiosDirEntry
     unsigned __int16 offsetToName;
     unsigned __int16 reserved[3];
     char fullPath[1024];
-};
+} SceFiosDirEntry;
 
-struct SceFiosOverlay
+typedef struct 
 {
     unsigned __int8 type;
     unsigned __int8 order;
@@ -218,9 +218,9 @@ struct SceFiosOverlay
     int id;
     char dst[292];
     char src[292];
-};
+} SceFiosOverlay;
 
-struct SceFiosStat
+typedef struct 
 {
     SceFiosSize fileSize;
     SceFiosDate accessDate;
@@ -233,12 +233,12 @@ struct SceFiosStat
     __int64 dev;
     __int64 ino;
     __int64 mode;
-};
+} SceFiosStat;
 
-struct FIOS2HANDLE
+typedef struct 
 {
     SceFiosHandle mFH;
-};
+} FIOS2HANDLE;
 
 #ifdef __cplusplus
 extern "C"
@@ -249,15 +249,15 @@ extern "C"
     SceFiosPsarcDearchiverContext *WINAPI sceFiosIOFilterPsarcDearchiver;
 
     SceFiosSize WINAPI sceFiosFHGetSize(SceFiosHandle lFH);
-    __int64 WINAPI sceFiosIOFilterAdd(__int64 unk1, uintptr_t lpIOFilter, SceFiosRamCacheContext *lpRamCacheContext);
-    __int64 WINAPI sceFiosIOFilterAdd(__int64 unk1, uintptr_t lpIOFilter, SceFiosPsarcDearchiverContext *lpPsarcDearchiverContext);
-    __int64 WINAPI sceFiosInitialize(SceFiosParams lParams);
-    __int64 WINAPI sceFiosIsValidHandle(SceFiosHandle lFH);
-    SceFiosSize WINAPI sceFiosFileGetSizeSync(SceFiosOffset lPos, const char *lpacFilename);
-    __int64 WINAPI sceFiosCachePrefetchFileSync(SceFiosOffset lPos, const char *lpacFilename);
-    __int64 WINAPI sceFiosExistsSync(SceFiosOffset lPos, const char *lpacFilename, __int64 unk1, const char *unk2);
-    __int64 WINAPI sceFiosFileRead(__int64 unk1, const char *lpacFilename, void *lpData, SceFiosSize liSize, SceFiosOffset liOffset);
-    __int64 WINAPI sceFiosArchiveMountSync(SceFiosOffset lPos, __int64 unk1, __int64 unk2, const char *lpMountPoint, __int64 unk3[2], __int64 unk4);
+    __int64 WINAPI sceFiosIOFilterAdd(int unk1, uintptr_t lpIOFilter, SceFiosRamCacheContext *lpRamCacheContext);
+    __int64 WINAPI sceFiosIOFilterAdd(int unk1, uintptr_t lpIOFilter, SceFiosPsarcDearchiverContext *lpPsarcDearchiverContext);
+    void WINAPI sceFiosInitialize(SceFiosParams lParams);
+    __int64 WINAPI sceFiosIsValidHandle(int lFH);
+    SceFiosSize WINAPI sceFiosFileGetSizeSync(SceFiosOpAttr lAttr, const char *lpacFilename);
+    __int64 WINAPI sceFiosCachePrefetchFileSync(SceFiosOpAttr lAttr, const char *lpacFilename);
+    __int64 WINAPI sceFiosExistsSync(SceFiosOpAttr lAttr, const char *lpacFilename);
+    __int64 WINAPI sceFiosFileRead(SceFiosOpAttr lAttr, const char *lpacFilename, void *lpData, SceFiosSize liSize, SceFiosOffset liOffset);
+    __int64 WINAPI sceFiosArchiveMountSync(SceFiosOpAttr lAttr, __int64 unk1, __int64 unk2, const char *lpMountPoint, __int64 unk3[2], __int64 unk4);
     SceFiosSize WINAPI sceFiosArchiveGetMountBufferSizeSync(__int64 unk1, const char *lpacFilename, __int64 unk2);
     __int64 WINAPI sceFiosFileReadSync(__int64 unk1, const char *lpacFilename, void *lpData, __int64 unk2, SceFiosOffset liOffset);
     __int64 WINAPI sceFiosOpGetError(__int64 unk1);
