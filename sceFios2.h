@@ -245,6 +245,8 @@ typedef union {
     SceFiosPsarcDearchiverContext *WINAPI sceFiosIOFilterPsarcDearchiver;
 } SceFiosFilterContext;
 
+#ifndef FIOS_TYPES_ONLY
+
 #ifdef __cplusplus
 extern "C"
 {
@@ -287,5 +289,7 @@ extern "C"
 #ifdef __cplusplus
 }
 #endif
+
+#endif // FIOS_TYPES_ONLY
 
 #endif //_SCEFIOS2_H_
