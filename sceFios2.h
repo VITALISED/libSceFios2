@@ -241,8 +241,8 @@ typedef struct
 } FIOS2HANDLE;
 
 typedef union {
-    SceFiosRamCacheContext *WINAPI sceFiosIOFilterCache;
-    SceFiosPsarcDearchiverContext *WINAPI sceFiosIOFilterPsarcDearchiver;
+    SceFiosRamCacheContext sceFiosIOFilterCache;
+    SceFiosPsarcDearchiverContext sceFiosIOFilterPsarcDearchiver;
 } SceFiosFilterContext;
 
 #ifndef FIOS_TYPES_ONLY
